@@ -1,5 +1,6 @@
 import React from "react";
 import SearchBar from "../../components/SearchBar";
+import bg from "../../../public/bg.png";
 
 const HomePage = () => {
   return (
@@ -51,7 +52,7 @@ const HomePage = () => {
       <div className="md:hidden sm:hidden flex-[2_2_0%] bg-sea-shell h-screen relative flex items-center">
         <img
           className="lg:w-[105%] absolute top-0 right-0 max-w-none w-[115%]"
-          src="/bg.png"
+          src={bg}
           alt="background"
         />
       </div>

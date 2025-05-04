@@ -1,4 +1,6 @@
 import { useState } from "react";
+import logo from "../../public/logo.png";
+import menu from "../../public/menu.png";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -8,7 +10,7 @@ const Navbar = () => {
       {/* Left */}
       <div className="flex-[3_3_0%] flex items-center gap-12">
         <a className="font-bold text-xl flex gap-2.5 items-center" href="/">
-          <img className="w-7" src="/logo.png" alt="" />
+          <img className="w-7" src={logo} alt="" />
           <span className="md:hidden sm:[display:initial]">YashEstate</span>
         </a>
         <a className="nav-link" href="/">
@@ -45,7 +47,7 @@ const Navbar = () => {
           <img
             className="h-9 w-9 cursor-pointer"
             onClick={() => setOpen(!open)}
-            src="/menu.png"
+            src={menu}
             alt=""
           />
         </div>

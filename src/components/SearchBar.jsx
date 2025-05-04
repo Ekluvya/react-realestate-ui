@@ -1,4 +1,5 @@
 import { useState } from "react";
+import search from "../../public/search.png";
 
 const SearchBar = () => {
   const types = ["Buy", "Rent"];
@@ -56,7 +57,7 @@ const SearchBar = () => {
           className="sm:p-4 border-none cursor-pointer bg-mustard flex-1 flex justify-center items-center"
           type="submit"
         >
-          <img src="/search.png" alt="search" />
+          <img src={search} alt="search" />
         </button>
       </form>
     </div>

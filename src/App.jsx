@@ -1,21 +1,32 @@
-import Navbar from "./components/Navbar";
+import Layout from "./layout/layout";
 import HomePage from "./routes/homePage/homePage";
 
+import {
+  createBrowserRouter,
+  Route,
+  Link,
+  RouterProvider,
+} from "react-router-dom";
+import ListPage from "./routes/listPage/listPage";
+
 function App() {
-  return (
-    <>
-      <div className="h-screen max-w-1366 lg:max-w-1280 md:max-w-768 sm:max-w-640 mx-auto px-5 flex flex-col">
-        {/* NAvbar */}
-        <div>
-          <Navbar />
-        </div>
-        {/* HomePage */}
-        <div className="flex-1">
-          <HomePage />
-        </div>
-      </div>
-    </>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/react-realestate-ui/",
+      element: <Layout />,
+      children: [
+        {
+          path: "",
+          element: <HomePage />,
+        },
+        {
+          path: "list",
+          element: <ListPage />,
+        },
+      ],
+    },
+  ]);
+  return <RouterProvider router={router} />;
 }
 
 export default App;
