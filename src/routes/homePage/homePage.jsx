@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <div className="flex">
       {/* Text */}
-      <div className="h-screen flex flex-col sm:justify-start justify-center gap-12 flex-[3_3_0%]">
+      <div className="min-h-screen flex flex-col sm:justify-start justify-center gap-12 flex-[3_3_0%]">
         <div className="flex flex-col gap-12 md:pr-0 sm:pr-0 pr-24">
           <h1 className="lg:text-4xl sm:4-xl text-5xl font-bold leading-tight">
             Find Real Estate & Get Your Dream Place
@@ -49,7 +49,7 @@ const HomePage = () => {
         </div>
       </div>
       {/* Image */}
-      <div className="md:hidden sm:hidden flex-[2_2_0%] bg-sea-shell h-screen relative flex items-center">
+      <div className="md:hidden sm:hidden flex-[2_2_0%] bg-sea-shell min-h-screen relative flex items-center">
         <img
           className="lg:w-[105%] absolute top-0 right-0 max-w-none w-[115%]"
           src={bg}

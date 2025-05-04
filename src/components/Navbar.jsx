@@ -54,7 +54,7 @@ const Navbar = () => {
 
         {/* Side Menu */}
         <div
-          className={`hidden text-2xl flex-col items-center justify-center absolute bg-black text-white h-screen w-2/4 top-0 ${
+          className={`hidden text-2xl flex-col items-center justify-center absolute bg-black text-white min-h-screen w-2/4 top-0 ${
             open
               ? "transition-all duration-1000 ease-in-out right-0 sm:[display:flex]"
               : "right-[-50%]"
