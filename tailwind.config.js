@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+import scrollbar from "tailwind-scrollbar";
+import scrollbarHide from "tailwind-scrollbar-hide";
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -11,6 +14,7 @@ export default {
         "sea-shell": "#fcf5f3",
         mustard: "#fece51", // purple
         "spanish-gray": "#999999",
+        "light-yellow": "#fecd5170",
       },
       spacing: {
         1366: "1366px",
@@ -26,5 +30,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [scrollbar, scrollbarHide],
 };
