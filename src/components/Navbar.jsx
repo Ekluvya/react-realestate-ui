@@ -6,7 +6,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="h-24 flex justify-between items-center overflow-hidden">
+    <nav className="h-24 flex justify-between items-center">
       {/* Left */}
       <div className="flex-[3_3_0%] flex items-center gap-12">
         <a className="font-bold text-xl flex gap-2.5 items-center" href="/">
