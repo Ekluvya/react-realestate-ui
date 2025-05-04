@@ -19,3 +19,13 @@
     overflow: hidden;
   }
 }
+
+@layer components {
+  .nav-link {
+    @apply transition-all duration-[400ms] ease-in-out hover:scale-105 sm:hidden;
+  }
+
+  .input-lg {
+    @apply px-1;
+  }
+}

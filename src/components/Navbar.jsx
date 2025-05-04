@@ -11,28 +11,16 @@ const Navbar = () => {
           <img className="w-7" src="/logo.png" alt="" />
           <span className="md:hidden sm:[display:initial]">YashEstate</span>
         </a>
-        <a
-          className="transition-all duration-[400ms] ease-in-out hover:scale-105 sm:hidden"
-          href="/"
-        >
+        <a className="nav-link" href="/">
           Home
         </a>
-        <a
-          className="transition-all duration-[400ms] ease-in-out hover:scale-105 sm:hidden"
-          href="/"
-        >
+        <a className="nav-link" href="/">
           About
         </a>
-        <a
-          className="transition-all duration-[400ms] ease-in-out hover:scale-105 sm:hidden"
-          href="/"
-        >
+        <a className="nav-link" href="/">
           Contact
         </a>
-        <a
-          className="transition-all duration-[400ms] ease-in-out hover:scale-105 sm:hidden"
-          href="/"
-        >
+        <a className="nav-link" href="/">
           Agents
         </a>
       </div>
@@ -75,31 +63,31 @@ const Navbar = () => {
             Home
           </a>
           <a
-            className="transition-all duration-[400ms] ease-in-out hover:scale-105 mt-5 sm:[display:initial] hidden"
+            className="transition-all duration-[400ms] ease-in-out hover:scale-105 sm:[display:initial] mt-5 hidden"
             href="/"
           >
             About
           </a>
           <a
-            className="transition-all duration-[400ms] ease-in-out hover:scale-105 mt-5 sm:[display:initial] hidden"
+            className="transition-all duration-[400ms] ease-in-out hover:scale-105 sm:[display:initial] mt-5 hidden"
             href="/"
           >
             Contact
           </a>
           <a
-            className="transition-all duration-[400ms] ease-in-out hover:scale-105 mt-5 sm:[display:initial] hidden"
+            className="transition-all duration-[400ms] ease-in-out hover:scale-105 sm:[display:initial] mt-5 hidden"
             href="/"
           >
             Agents
           </a>
           <a
-            className="transition-all duration-[400ms] ease-in-out hover:scale-105 mt-5 sm:[display:initial] hidden"
+            className="transition-all duration-[400ms] ease-in-out hover:scale-105 sm:[display:initial] mt-5 hidden"
             href="/"
           >
             Sign In
           </a>
           <a
-            className="transition-all duration-[400ms] ease-in-out hover:scale-105 mt-5 sm:[display:initial] hidden"
+            className="transition-all duration-[400ms] ease-in-out hover:scale-105 sm:[display:initial] mt-5 hidden"
             href="/"
           >
             Sign Up

@@ -29,15 +29,15 @@ const SearchBar = () => {
           );
         })}
       </div>
-      <form className="border border-spanish-gray flex justify-between h-16 gap-1">
+      <form className="border sm:flex-col border-spanish-gray sm:border-none flex justify-between h-16 gap-1">
         <input
-          className="border-none py-0 px-2.5 w-48"
+          className="sm:border sm:border-solid sm:border-spanish-gray border-none focus:outline-none lg:w-36 md:w-44 sm:w-auto sm:p-5 lg:px-1 py-0 px-2.5 w-48"
           type="text"
           name="location"
           placeholder="City Location"
         ></input>
         <input
-          className="border-none py-0 px-2.5 w-48"
+          className="sm:border sm:border-solid sm:border-spanish-gray border-none focus:outline-none lg:w-36 md:w-44 sm:w-auto sm:p-5 lg:px-1 py-0 px-2.5 w-48"
           type="number"
           name="minPrice"
           min={0}
@@ -45,7 +45,7 @@ const SearchBar = () => {
           placeholder="Min Price"
         ></input>
         <input
-          className="border-none py-0 px-2.5 w-48"
+          className="sm:border sm:border-solid sm:border-spanish-gray border-none focus:outline-none lg:w-36 md:w-44 sm:w-auto sm:p-5 lg:px-1 py-0 px-2.5 w-48"
           type="number"
           name="maxPrice"
           min={0}
@@ -53,7 +53,7 @@ const SearchBar = () => {
           placeholder="Max Price"
         ></input>
         <button
-          className=" border-none cursor-pointer bg-mustard flex-1 flex justify-center items-center"
+          className="sm:p-4 border-none cursor-pointer bg-mustard flex-1 flex justify-center items-center"
           type="submit"
         >
           <img src="/search.png" alt="search" />
