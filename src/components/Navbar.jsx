@@ -6,7 +6,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="h-24 flex justify-between items-center">
+    <nav className="h-24 flex justify-between items-center overflow-hidden">
       {/* Left */}
       <div className="flex-[3_3_0%] flex items-center gap-12">
         <a className="font-bold text-xl flex gap-2.5 items-center" href="/">
@@ -54,8 +54,10 @@ const Navbar = () => {
 
         {/* Side Menu */}
         <div
-          className={` transition-all duration-1000 ease-in-out text-2xl flex flex-col items-center justify-center absolute bg-black text-white h-screen w-2/4 top-0 ${
-            open ? "right-0" : "right-[-50%]"
+          className={`hidden text-2xl flex-col items-center justify-center absolute bg-black text-white h-screen w-2/4 top-0 ${
+            open
+              ? "transition-all duration-1000 ease-in-out right-0 sm:[display:flex]"
+              : "right-[-50%]"
           }`}
         >
           <a
