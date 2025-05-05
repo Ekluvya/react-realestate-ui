@@ -16,19 +16,23 @@ const Slider = ({ images }) => {
     // Slider
     <div className="w-full h-[350px] flex sm:flex-col gap-[20px] justify-between items-center">
       {imageIndex !== null && (
-        <div className="flex absolute w-screen h-screen top-0 left-0 bg-black">
+        <div className="flex absolute w-screen h-screen top-0 left-0 bg-black z-[1000] sm:items-center sm:justify-center">
           {/* Arrow */}
           <div
             className="flex-1 cursor-pointer flex items-center justify-center"
             onClick={() => changeSlide("left")}
           >
-            <img className="w-[50px] object-cover" src={arrow} alt="" />
+            <img
+              className="w-[50px] object-cover sm:w-[15px]"
+              src={arrow}
+              alt=""
+            />
           </div>
 
           {/* Image Container */}
           <div className="flex-[10_10_0%] py-9">
             <img
-              className="w-full h-full object-cover rounded-md"
+              className="w-full h-full object-cover rounded-md sm:h-[50%] sm:object-contain"
               src={images[imageIndex]}
               alt=""
             />
@@ -40,7 +44,7 @@ const Slider = ({ images }) => {
             onClick={() => changeSlide("right")}
           >
             <img
-              className="w-[50px] object-cover transform rotate-180"
+              className="w-[50px] object-cover transform rotate-180 sm:w-[15px]"
               src={arrow}
               alt=""
             />
