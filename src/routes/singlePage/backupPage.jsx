@@ -13,9 +13,9 @@ import bathroom from "../../../public/bath.png";
 
 const SinglePage = () => {
   return (
-    <div className="flex h-full">
-      <div className="flex-[3_3_0%]">
-        <div className="pr-12">
+    <div className="flex sm:flex-col md:flex-col">
+      <div className="flex-[3_3_0%] h-full">
+        <div className="pr-12 sm:pr-0 md:pr-0">
           <Slider images={singlePostData.images} />
           {/* Info */}
           <div className="mt-8">
@@ -67,7 +67,7 @@ const SinglePage = () => {
           </div>
         </div>
       </div>
-      <div className="flex-[2_2_0%] bg-sea-shell border-l border-gray-100">
+      <div className="flex-[2_2_0%] md:py-4 sm:py-4 bg-sea-shell border-l border-gray-100 md:w-full md:max-h-[calc(100vh-100px)]">
         <div className="px-6 space-y-4">
           <p className="font-bold text-gray-700 mb-2">General</p>
           <div className="bg-white rounded-lg shadow-sm px-5 py-2 divide-y divide-gray-100">

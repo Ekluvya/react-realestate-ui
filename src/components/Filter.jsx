@@ -22,11 +22,11 @@ const Filter = () => {
         </div>
       </div>
       {/* Bottom */}
-      <div className="flex justify-between gap-[20px]">
+      <div className="flex justify-between gap-[20px] sm:flex-col sm:gap-[10px]">
         <div className="flex flex-col gap-[2px]">
           <label htmlFor="type">Type</label>
           <select
-            className="p-[10px] w-[100px] sm:w-[80px] border-spanish-gray border border-solid rounded-sm text-sm"
+            className="p-[10px] w-[100px] sm:w-full border-spanish-gray border border-solid rounded-sm text-sm"
             name="type"
             id="type"
           >
@@ -39,7 +39,7 @@ const Filter = () => {
         <div className="flex flex-col gap-[2px]">
           <label htmlFor="property">Property</label>
           <select
-            className="p-[10px] w-[100px] sm:w-[80px] border-spanish-gray border border-solid rounded-sm text-sm"
+            className="p-[10px] w-[100px] sm:w-full border-spanish-gray border border-solid rounded-sm text-sm"
             name="property"
             id="property"
           >
@@ -54,7 +54,7 @@ const Filter = () => {
         <div className="flex flex-col gap-[2px]">
           <label htmlFor="minPrice">Min Price</label>
           <input
-            className="p-[10px] w-[100px] sm:w-[80px] border-spanish-gray border border-solid rounded-sm text-sm"
+            className="p-[10px] w-[100px] sm:w-full border-spanish-gray border border-solid rounded-sm text-sm"
             type="number"
             id="minPrice"
             name="minPrice"
@@ -65,7 +65,7 @@ const Filter = () => {
         <div className="flex flex-col gap-[2px]">
           <label htmlFor="maxPrice">Max Price</label>
           <input
-            className="p-[10px] w-[100px] sm:w-[80px] border-spanish-gray border border-solid rounded-sm text-sm"
+            className="p-[10px] w-[100px] sm:w-full border-spanish-gray border border-solid rounded-sm text-sm"
             type="number"
             id="maxPrice"
             name="maxPrice"
@@ -76,7 +76,7 @@ const Filter = () => {
         <div className="flex flex-col gap-[2px]">
           <label htmlFor="bedroom">Bedroom</label>
           <input
-            className="p-[10px] w-[100px] sm:w-[80px] border-spanish-gray border border-solid rounded-sm text-sm"
+            className="p-[10px] w-[100px] sm:w-full border-spanish-gray border border-solid rounded-sm text-sm"
             type="number"
             id="bedroom"
             name="bedroom"
@@ -84,7 +84,7 @@ const Filter = () => {
           />
         </div>
 
-        <button className="bg-mustard w-[100px] sm:w-[80px] p-[10px] flex justify-center items-center border-none cursor-pointer">
+        <button className="bg-mustard w-[100px] sm:w-full p-[10px] flex justify-center items-center border-none cursor-pointer">
           <img width={24} height={24} src={search} alt="search" />
         </button>
       </div>

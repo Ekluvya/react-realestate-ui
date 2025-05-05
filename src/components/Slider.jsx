@@ -14,7 +14,7 @@ const Slider = ({ images }) => {
 
   return (
     // Slider
-    <div className="w-full h-[350px] flex gap-[20px] justify-between items-center">
+    <div className="w-full h-[350px] flex sm:flex-col gap-[20px] justify-between items-center">
       {imageIndex !== null && (
         <div className="flex absolute w-screen h-screen top-0 left-0 bg-black">
           {/* Arrow */}
@@ -66,11 +66,11 @@ const Slider = ({ images }) => {
         />
       </div>
       {/* //Small Images */}
-      <div className="flex-1 flex flex-col justify-between gap-[20px]">
+      <div className="flex-1 flex flex-col justify-between gap-[20px] sm:flex-row">
         {images.slice(1).map((image, index) => {
           return (
             <img
-              className="w-full h-[100px] object-cover rounded-xl cursor-pointer"
+              className="w-full h-[100px] object-cover rounded-xl cursor-pointer sm:w-24"
               src={image}
               alt=""
               key={index}

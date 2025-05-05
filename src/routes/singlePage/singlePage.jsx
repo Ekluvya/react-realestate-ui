@@ -13,7 +13,7 @@ import bathroom from "../../../public/bath.png";
 
 const SinglePage = () => {
   return (
-    <div className="flex sm:flex-col md:flex-col">
+    <div className="flex sm:flex-col md:flex-col xl:h-screen">
       <div className="flex-[3_3_0%] h-full">
         <div className="pr-12 sm:pr-0 md:pr-0">
           <Slider images={singlePostData.images} />
@@ -23,23 +23,23 @@ const SinglePage = () => {
             <div className="flex justify-between items-start">
               {/* Post */}
               <div className="flex flex-col gap-[20px]">
-                <h1 className="text-2xl font-semibold text-gray-800">
+                <h1 className="text-2xl font-semibold text-gray-800 sm:text-xl">
                   {singlePostData.title}
                 </h1>
                 {/* Address */}
-                <div className="flex items-center mt-2 text-gray-600">
+                <div className="flex items-center mt-2 text-gray-600 sm:text-sm">
                   <img className="w-4 h-4 mr-2" src={pin} alt="" />
                   <span>{singlePostData.address}</span>
                 </div>
 
                 {/* Price */}
-                <div className="mt-4 text-xl font-light p-[10px] text-black bg-mustard w-[150px] text-center">
+                <div className="mt-4 text-xl font-light p-[10px] text-black bg-mustard w-[150px] text-center sm:text-base sm:w-[100px]">
                   ₹ {singlePostData.price}
                 </div>
               </div>
 
               {/* User */}
-              <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-lg shadow-sm">
+              <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-lg shadow-sm sm:flex-col sm:text-center">
                 <div className="h-12 w-12 overflow-hidden rounded-full">
                   <img
                     height={50}
@@ -49,7 +49,7 @@ const SinglePage = () => {
                     alt=""
                   />
                 </div>
-                <span className="font-medium text-black">
+                <span className="font-medium text-black sm:text-sm">
                   {singleUserData.name}
                 </span>
               </div>
@@ -124,7 +124,7 @@ const SinglePage = () => {
               {" "}
               {/* Use justify-between or adjust gap */}
               {/* Size */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 sm:flex-col">
                 {" "}
                 {/* Item container */}
                 <div className="w-10 h-10 flex items-center justify-center bg-gray-50 rounded-full flex-shrink-0">
@@ -132,7 +132,7 @@ const SinglePage = () => {
                   {/* Icon container */}
                   <img src={size} alt="Size" className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="text-center">
                   {" "}
                   {/* Text container */}
                   <span className="font-medium text-gray-800 block text-sm">
@@ -148,7 +148,7 @@ const SinglePage = () => {
                 </div>
               </div>
               {/* Bedrooms */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 sm:flex-col">
                 {" "}
                 {/* Item container */}
                 <div className="w-10 h-10 flex items-center justify-center bg-gray-50 rounded-full flex-shrink-0">
@@ -156,7 +156,7 @@ const SinglePage = () => {
                   {/* Icon container */}
                   <img src={bedroom} alt="Bedrooms" className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="text-center">
                   {" "}
                   {/* Text container */}
                   <span className="font-medium text-gray-800 block text-sm">
@@ -171,7 +171,7 @@ const SinglePage = () => {
                 </div>
               </div>
               {/* Bathrooms */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 sm:flex-col">
                 {" "}
                 {/* Item container */}
                 <div className="w-10 h-10 flex items-center justify-center bg-gray-50 rounded-full flex-shrink-0">
@@ -179,7 +179,7 @@ const SinglePage = () => {
                   {/* Icon container */}
                   <img src={bathroom} alt="Bathrooms" className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="text-center">
                   {" "}
                   {/* Text container */}
                   <span className="font-medium text-gray-800 block text-sm">
@@ -202,7 +202,7 @@ const SinglePage = () => {
             {/* Row Container */}
             <div className="flex justify-between items-center gap-x-4 sm:gap-x-8">
               {/* School */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 sm:flex-col">
                 {" "}
                 {/* Item container */}
                 <div className="w-10 h-10 flex items-center justify-center bg-gray-50 rounded-full flex-shrink-0">
@@ -211,7 +211,7 @@ const SinglePage = () => {
                   {/* Replace with actual school icon */}
                   <img src={utility} alt="School" className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="text-center">
                   {" "}
                   {/* Text container */}
                   <span className="font-medium text-gray-800 block text-sm">
@@ -228,7 +228,7 @@ const SinglePage = () => {
               </div>
 
               {/* Bus Stop */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 sm:flex-col">
                 {" "}
                 {/* Item container */}
                 <div className="w-10 h-10 flex items-center justify-center bg-gray-50 rounded-full flex-shrink-0">
@@ -238,7 +238,7 @@ const SinglePage = () => {
                   <img src={pet} alt="Bus Stop" className="w-5 h-5" />{" "}
                   {/* Using pet icon as placeholder */}
                 </div>
-                <div>
+                <div className="text-center">
                   {" "}
                   {/* Text container */}
                   <span className="font-medium text-gray-800 block text-sm">
@@ -249,7 +249,7 @@ const SinglePage = () => {
               </div>
 
               {/* Restaurant */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 sm:flex-col">
                 {" "}
                 {/* Item container */}
                 <div className="w-10 h-10 flex items-center justify-center bg-gray-50 rounded-full flex-shrink-0">
@@ -259,7 +259,7 @@ const SinglePage = () => {
                   <img src={fee} alt="Restaurant" className="w-5 h-5" />{" "}
                   {/* Using fee icon as placeholder */}
                 </div>
-                <div>
+                <div className="text-center">
                   {" "}
                   {/* Text container */}
                   <span className="font-medium text-gray-800 block text-sm">
@@ -277,7 +277,7 @@ const SinglePage = () => {
             <Map items={[singlePostData]} />
           </div>
 
-          <div className="mt-6 flex gap-4">
+          <div className="mt-6 flex gap-4 sm:text-xs">
             <button className="flex items-center gap-2 bg-mustard hover:bg-slate-200 hover:text-black text-white font-bold py-4 px-4 rounded-md shadow-sm transition-colors duration-200">
               <img src={chat} alt="" className="w-5 h-5" />
               Send a message
