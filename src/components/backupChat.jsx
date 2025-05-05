@@ -4,7 +4,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const ChatWindow = ({ onClick }) => {
   return (
-    <div className="absolute bg-slate-500 bottom-2 rounded-lg shadow-md p-4 flex flex-col h-[500px] sm:fixed sm:top-0 sm:h-screen sm:mr-0 sm:bottom-[-8px] sm:rounded-none sm:w-screen md:h-[500px] w-full max-w-md">
+    <div className="absolute bg-slate-500 bottom-2 rounded-lg shadow-md p-4 flex flex-col h-[500px] sm:h-screen sm:mr-0 sm:bottom-[-8px] sm:rounded-none sm:w-screen md:h-[500px] w-full max-w-md">
       {/* Header */}
       <div className="flex items-center justify-between mb-4 border-b border-spanish-gray pb-2">
         <div className="flex items-center space-x-2">

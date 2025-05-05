@@ -12,10 +12,18 @@ const Chat = () => {
 
   return (
     <>
-      <div className="h-full w-full flex flex-col items-center">
+      <div className="h-full w-full flex flex-col items-center relative">
         <div className="flex flex-col gap-4 h-full w-full rounded-lg overflow-y-auto">
           {" "}
           {/* Added flex, flex-col, gap-4, padding, and overflow */}
+          <Message
+            imageSrc={
+              "https://images.pexels.com/photos/1462637/pexels-photo-1462637.jpeg"
+            }
+            name={"John Doe"}
+            message={"lorem ipsum se amet ipet japut....."}
+            onClick={handleOpenChat}
+          />
           <Message
             imageSrc={
               "https://images.pexels.com/photos/1462637/pexels-photo-1462637.jpeg"
