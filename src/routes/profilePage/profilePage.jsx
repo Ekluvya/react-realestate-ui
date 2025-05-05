@@ -7,10 +7,10 @@ import Chat from "../../components/Chat";
 
 const ProfilePage = () => {
   return (
-    <div className="flex flex-col lg:flex-row h-full">
+    <div className="flex flex-col xl:gap[20px] xl:flex-row lg:flex-row h-full">
       {/* Details Section */}
-      <div className="lg:flex-[3_3_0%] w-full lg:h-[calc(100vh-100px)]">
-        <div className="py-4 lg:pr-6 mb-6 h-full overflow-y-auto lg:scrollbar-none lg:overflow-scroll pb-5">
+      <div className=" xl:flex-[3_3_0%] lg:flex-[3_3_0%] w-full xl:h-[calc(100vh-100px)] lg:h-[calc(100vh-100px)]">
+        <div className="py-4 xl:pr-6 lg:pr-6 mb-6 h-full overflow-y-auto xl:scrollbar-none lg:scrollbar-none lg:overflow-scroll pb-5">
           {/* User Info Header */}
           <div className="flex items-center justify-between mb-6 mt-4">
             <h1 className="text-3xl sm:text-2xl font-light text-gray-800">
@@ -60,7 +60,7 @@ const ProfilePage = () => {
       </div>
 
       {/* Chat Section */}
-      <div className="lg:flex-[2_2_0%] w-full bg-sea-shell lg:h-[calc(100vh-100px)] flex items-center justify-center">
+      <div className="xl:flex-[2_2_0%] lg:flex-[2_2_0%] w-full bg-sea-shell lg:h-[calc(100vh-100px)] flex items-center justify-center">
         <div className="h-full flex flex-col justify-between max-w-md w-full p-4">
           <h1 className="text-3xl font-light text-gray-800 mb-4">Messages</h1>
           <Chat />
