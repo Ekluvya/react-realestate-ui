@@ -132,7 +132,7 @@ export const singlePostData = {
     "https://images.pexels.com/photos/173955/pexels-photo-173955.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     "https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   ],
-  bedrooms: 2,
+  bedroom: 2,
   bathroom: 1,
   size: 861,
   latitude: 23.8333,
