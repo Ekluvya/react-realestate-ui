@@ -2,19 +2,20 @@ import React, { useState } from "react";
 import Button from "../../components/Button"; // Adjusted import path
 import Input from "../../components/Input"; // Adjusted import path
 import Label from "../../components/Label"; // Adjusted import path
-import { cn } from "../../lib/utils"; // Adjusted import path
 import { motion } from "framer-motion";
 import logo from "../../../public/logo2.png";
-import { Lock, Mail, KeyRound, ArrowRight } from "lucide-react";
+import { Lock, Mail, KeyRound, User, ArrowRight } from "lucide-react";
 import axios from "axios";
-//import { setCookie } from "cookies-next"; // Import setCookie
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  // Inside your component
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -24,21 +25,31 @@ const Login = () => {
     setError("");
 
     // Basic validation
-    if (!email || !password) {
+    if (!name || !email || !password || !confirmPassword) {
       setError("Please fill in all fields.");
       setIsLoading(false);
       return;
     }
 
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      setIsLoading(false);
+      return;
+    }
+
+    console.log({
+      username: name,
+      email: email,
+      password: password,
+    });
     // Simulate an API call
     try {
-      // Replace this with your actual authentication logic
-      new Promise((resolve) => setTimeout(resolve, 1500));
-
+      //new Promise((resolve) => setTimeout(resolve, 1500));
       axios
         .post(
-          "http://localhost:8000/api/auth/login",
+          "http://localhost:8000/api/auth/register",
           {
+            username: name,
             email: email,
             password: password,
           },
@@ -46,24 +57,20 @@ const Login = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            withCredentials: true,
           }
         )
-        .then(function (response) {
-          if (response.status === 200) {
-            //  Use cookies-next to set the cookie
-            console.log(response);
-
-            // Handle successful login (e.g., redirect)
-            console.log("Login successful!");
-            navigate("/profile");
-          } else {
-            setError("Login failed. Please check your credentials.");
-          }
+        .then(function () {
+          navigate("/login"); // ✅ redirect to login
+        })
+        .catch(function () {
+          setError("Registration failed.");
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     } catch (err) {
       // Removed: : any
-      setError(err.message || "An error occurred during login.");
+      console.log(err);
     } finally {
       setIsLoading(false);
     }
@@ -86,9 +93,9 @@ const Login = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mt-6 text-center text-3xl font-extrabold text-white"
+            className="mt-6 text-3xl font-extrabold text-white"
           >
-            Welcome back!
+            Create an account
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: -10 }}
@@ -96,7 +103,7 @@ const Login = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-2 text-center text-sm text-gray-300"
           >
-            Log in to your account to continue.
+            Register to get started.
           </motion.p>
         </div>
         <motion.form
@@ -106,7 +113,25 @@ const Login = () => {
           className="mt-8 space-y-6"
           onSubmit={handleSubmit}
         >
-          <div className="rounded-md shadow-sm space-y-4">
+          <div className="rounded-md shadow-sm space-y-6">
+            <div>
+              <Label htmlFor="name" className="sr-only">
+                Name
+              </Label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Full Name"
+                />
+              </div>
+            </div>
             <div>
               <Label htmlFor="email-address" className="sr-only">
                 Email address
@@ -121,8 +146,6 @@ const Login = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="appearance-none rounded-md relative block w-full px-10 py-3 text-white placeholder-gray-400 
-                    focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:z-10 sm:text-sm bg-gray-800 border border-gray-700"
                   placeholder="Email address"
                 />
               </div>
@@ -137,15 +160,29 @@ const Login = () => {
                   id="password"
                   name="password"
                   type="password"
-                  autoComplete="current-password"
+                  autoComplete="new-password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className={cn(
-                    "appearance-none rounded-md relative block w-full px-10 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:z-10 sm:text-sm bg-gray-800 border border-gray-700",
-                    error && "border-2 border-red-500 focus:ring-red-500" // Apply error styles
-                  )}
                   placeholder="Password"
+                />
+              </div>
+            </div>
+            <div>
+              <Label htmlFor="confirm-password" className="sr-only">
+                Confirm Password
+              </Label>
+              <div className="relative">
+                <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Input
+                  id="confirm-password"
+                  name="confirm-password"
+                  type="password"
+                  autoComplete="new-password"
+                  required
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Confirm Password"
                 />
               </div>
             </div>
@@ -178,7 +215,7 @@ const Login = () => {
                 </span>
               ) : (
                 <>
-                  Log in
+                  Create Account
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform text-gray-900" />
                 </>
               )}
@@ -187,10 +224,10 @@ const Login = () => {
         </motion.form>
         <div className="text-center">
           <a
-            href="#/register"
+            href="#/login" //  change this to your actual login route
             className="text-sm font-medium text-yellow-400 hover:text-yellow-300 transition-colors"
           >
-            New User? Click to Register!
+            Already have an account? Log in
           </a>
         </div>
       </div>
@@ -198,4 +235,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
