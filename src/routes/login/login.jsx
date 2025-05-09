@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "../../components/Button"; // Adjusted import path
 import Input from "../../components/Input"; // Adjusted import path
 import Label from "../../components/Label"; // Adjusted import path
@@ -6,9 +6,9 @@ import { cn } from "../../lib/utils"; // Adjusted import path
 import { motion } from "framer-motion";
 import logo from "../../../public/logo2.png";
 import { Lock, Mail, KeyRound, ArrowRight } from "lucide-react";
-import axios from "axios";
-//import { setCookie } from "cookies-next"; // Import setCookie
+import apiRequest from "../../lib/apiRequest";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/authContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,13 +16,14 @@ const Login = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { updateUser } = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     // Removed: React.FormEvent
-    e.preventDefault();
-    setIsLoading(true);
-    setError("");
 
+    e.preventDefault();
+    setError("");
+    setIsLoading(true);
     // Basic validation
     if (!email || !password) {
       setError("Please fill in all fields.");
@@ -32,35 +33,22 @@ const Login = () => {
 
     // Simulate an API call
     try {
-      // Replace this with your actual authentication logic
-      new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await apiRequest.post(
+        // Use await
+        "/auth/login",
+        { email, password },
+        { headers: { "Content-Type": "application/json" } }
+      );
 
-      axios
-        .post(
-          "http://localhost:8000/api/auth/login",
-          {
-            email: email,
-            password: password,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            withCredentials: true,
-          }
-        )
-        .then(function (response) {
-          if (response.status === 200) {
-            //  Use cookies-next to set the cookie
-            console.log(response);
+      if (response.status === 200) {
+        console.log(response);
 
-            // Handle successful login (e.g., redirect)
-            console.log("Login successful!");
-            navigate("/profile");
-          } else {
-            setError("Login failed. Please check your credentials.");
-          }
-        });
+        const meResponse = await apiRequest.get("/auth/me"); // Await here too
+        console.log("User logger");
+        console.log(meResponse.data);
+        updateUser(meResponse.data);
+        navigate("/profile");
+      }
     } catch (err) {
       // Removed: : any
       setError(err.message || "An error occurred during login.");

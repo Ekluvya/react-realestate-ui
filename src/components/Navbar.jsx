@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import logo from "../../public/logo.png";
 import menu from "../../public/menu.png";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/authContext";
+import noAvatar from "../../public/noavatar.jpg";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const user = true;
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <nav className="h-24 flex justify-between items-center">
@@ -31,17 +33,17 @@ const Navbar = () => {
 
       {/* Right */}
       <div className="flex-[2_2_0%] flex items-center justify-end bg-sea-shell h-full lg:bg-transparent md:bg-transparent sm:bg-transparent">
-        {user ? (
+        {currentUser ? (
           <div className="flex items-center gap-7 mr-8 sm:gap-0">
             {/* User Info Button */}
             <button className="flex items-center gap-4 px-3 py-1 rounded-md hover:bg-gray-100 transition-all sm:gap-0 sm:hover:bg-transparent">
               <img
-                src="https://images.pexels.com/photos/1462637/pexels-photo-1462637.jpeg"
+                src={currentUser.avatar || noAvatar}
                 alt="User"
                 className="w-12 h-12 rounded-full object-cover border border-gray-300 sm:h-9 sm:w-9"
               />
               <span className="text-sm font-bold text-gray-800 sm:hidden">
-                John Doe
+                {currentUser.username}
               </span>
             </button>
 
@@ -61,13 +63,13 @@ const Navbar = () => {
           <>
             <a
               className="px-6 py-3 m-5 transition-all duration-[400ms] ease-in-out hover:scale-105 sm:hidden"
-              href="/"
+              href="#/login"
             >
               Sign In
             </a>
             <a
               className="bg-mustard px-6 py-3 m-5 transition-all duration-[400ms] ease-in-out hover:scale-105 sm:hidden"
-              href="/"
+              href="#/register"
             >
               Sign Up
             </a>{" "}

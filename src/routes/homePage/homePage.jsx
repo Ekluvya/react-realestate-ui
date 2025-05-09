@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import SearchBar from "../../components/SearchBar";
 import bg from "../../../public/bg.png";
+import { AuthContext } from "../../context/authContext";
 
 const HomePage = () => {
+  const { currentUser } = useContext(AuthContext);
+
+  console.log(currentUser);
   return (
     <div className="flex">
       {/* Text */}

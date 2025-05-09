@@ -5,7 +5,7 @@ import Label from "../../components/Label"; // Adjusted import path
 import { motion } from "framer-motion";
 import logo from "../../../public/logo2.png";
 import { Lock, Mail, KeyRound, User, ArrowRight } from "lucide-react";
-import axios from "axios";
+import apiRequest from "../../lib/apiRequest";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -45,9 +45,9 @@ const Register = () => {
     // Simulate an API call
     try {
       //new Promise((resolve) => setTimeout(resolve, 1500));
-      axios
+      apiRequest
         .post(
-          "http://localhost:8000/api/auth/register",
+          "/auth/register",
           {
             username: name,
             email: email,
