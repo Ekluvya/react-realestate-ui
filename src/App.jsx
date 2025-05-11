@@ -8,6 +8,7 @@ import ProfilePage from "./routes/profilePage/profilePage";
 import Login from "./routes/login/login";
 import Register from "./routes/register/register";
 import UpdateUser from "./routes/updateUser/updateUser";
+import NewPostPage from "./routes/createPostPage/createPostPage";
 
 function App() {
   const router = createHashRouter([
@@ -42,6 +43,10 @@ function App() {
         {
           path: "update",
           element: <UpdateUser />,
+        },
+        {
+          path: "createPost",
+          element: <NewPostPage />,
         },
       ],
     },

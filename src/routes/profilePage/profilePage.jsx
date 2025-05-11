@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Card from "../../components/Card";
 import Message from "../../components/Message";
 import List from "../../components/List";
 import ChatWindow from "../../components/ChatWindow";
 import Chat from "../../components/Chat";
 import apiRequest from "../../lib/apiRequest";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import noAvatar from "../../../public/noavatar.jpg";
 
@@ -71,7 +71,7 @@ const ProfilePage = () => {
               My List
             </h1>
             <button className="relative px-4 py-2 bg-mustard text-sm text-black hover:bg-gray-200 hover:text-slate-800 font-medium transition flex items-center gap-2">
-              Create New Post
+              <Link to={"/createPost"}>Create New Post</Link>
             </button>
           </div>
 

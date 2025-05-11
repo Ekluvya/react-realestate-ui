@@ -43,7 +43,7 @@ const Login = () => {
       if (response.status === 200) {
         console.log(response);
 
-        const meResponse = await apiRequest.get("/auth/me"); // Await here too
+        const meResponse = await apiRequest.get("/user/me"); // Await here too
         console.log("User logger");
         console.log(meResponse.data);
         updateUser(meResponse.data);

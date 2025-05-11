@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
-import Button from "../../components/Button"; // Adjust the path if necessary
-import Input from "../../components/Input"; // Adjust the path if necessary
-import Label from "../../components/Label"; // Adjust the path if necessary
+import Button from "../../components/Button";
+import Input from "../../components/Input";
+import Label from "../../components/Label";
 import { motion } from "framer-motion";
 import {
   User,
@@ -10,24 +10,35 @@ import {
   CheckCircle,
   Loader2,
   ArrowRight,
-} from "lucide-react"; // Added icons
-import apiRequest from "../../lib/apiRequest"; // Adjust the path if necessary
+} from "lucide-react";
+import apiRequest from "../../lib/apiRequest";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/authContext"; // Adjust the path if necessary
+import { AuthContext } from "../../context/authContext";
+import noAvatar from "../../../public/noavatar.jpg";
+import UploadWidget from "../../components/UploadWidget";
 
+const cloudName = "ddloex2oi";
+const uploadPreset = "estate";
+
+const uwConfig = {
+  cloudName,
+  uploadPreset,
+  multiple: false,
+  maxImageFileSize: 2000000,
+  foldeR: "avatars",
+};
 const UpdateUser = () => {
   const { currentUser, updateUser } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState(""); // Consider how you want to handle this
+  const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isUpdated, setIsUpdated] = useState(false); // Track update success
+  const [isUpdated, setIsUpdated] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Populate the form with the current user's data
     if (currentUser) {
       setUsername(currentUser.username || "");
       setEmail(currentUser.email || "");
@@ -44,27 +55,21 @@ const UpdateUser = () => {
     const userData = {
       username: username,
       email: email,
-      ...(password ? { password: password } : {}), // Include password only if it's provided
+      ...(password ? { password: password } : {}),
       avatar: avatar,
     };
 
     try {
-      const response = await apiRequest.put(
-        `/auth/user/${currentUser.id}`,
-        userData,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const response = await apiRequest.put("/user/update", userData, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
 
       if (response.status === 200) {
         console.log("User updated successfully", response.data);
-        // Update the user context with the new data
-        updateUser({ ...currentUser, ...response.data }); // Merge existing with updated
-        setIsUpdated(true); // Set success state
-        // Optionally, clear the password field after successful update
+        updateUser({ ...currentUser, ...response.data });
+        setIsUpdated(true);
         setPassword("");
-        // Navigate to profile page after successful update
         setTimeout(() => {
           navigate("/profile");
         }, 2000);
@@ -78,8 +83,12 @@ const UpdateUser = () => {
     }
   };
 
+  useEffect(() => {
+    console.log(avatar);
+  }, [avatar, setAvatar]);
+
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-[3_3_0%] items-center justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <motion.h2
@@ -98,6 +107,16 @@ const UpdateUser = () => {
           >
             Modify your profile information below.
           </motion.p>
+          {/* Avatar Display */}
+
+          <div className="mt-4 flex justify-center mb-3">
+            <img
+              src={avatar ? avatar : noAvatar}
+              alt="Current Avatar"
+              className="w-20 h-20 rounded-full border-2 border-gray-700"
+            />
+          </div>
+          <UploadWidget uwConfig={uwConfig} setAvatar={setAvatar} />
         </div>
 
         <motion.form
@@ -160,24 +179,6 @@ const UpdateUser = () => {
                   className="appearance-none rounded-md relative block w-full px-10 py-3 text-white placeholder-gray-400
                                         focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:z-10 sm:text-sm bg-gray-800 border border-gray-700"
                   placeholder="Password (Leave blank to keep current)"
-                />
-              </div>
-            </div>
-            <div>
-              <Label htmlFor="avatar" className="sr-only">
-                Avatar URL
-              </Label>
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <Input
-                  id="avatar"
-                  name="avatar"
-                  type="text"
-                  value={avatar}
-                  onChange={(e) => setAvatar(e.target.value)}
-                  className="appearance-none rounded-md relative block w-full px-10 py-3 text-white placeholder-gray-400
-                                        focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:z-10 sm:text-sm bg-gray-800 border border-gray-700"
-                  placeholder="Avatar URL"
                 />
               </div>
             </div>
