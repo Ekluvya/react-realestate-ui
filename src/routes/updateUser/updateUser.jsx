@@ -58,7 +58,7 @@ const UpdateUser = () => {
       ...(password ? { password: password } : {}),
       avatar: avatar,
     };
-
+    console.log(userData);
     try {
       const response = await apiRequest.put("/user/update", userData, {
         headers: { "Content-Type": "application/json" },

@@ -1,90 +1,80 @@
-import arrow from "../../public/arrow.png";
 import { useState } from "react";
-
-const Slider = ({ images }) => {
+import arrow from "../../public/arrow.png";
+function Slider({ images }) {
   const [imageIndex, setImageIndex] = useState(null);
 
   const changeSlide = (direction) => {
     if (direction === "left") {
-      setImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+      if (imageIndex === 0) {
+        setImageIndex(images.length - 1);
+      } else {
+        setImageIndex(imageIndex - 1);
+      }
     } else {
-      setImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+      if (imageIndex === images.length - 1) {
+        setImageIndex(0);
+      } else {
+        setImageIndex(imageIndex + 1);
+      }
     }
   };
 
   return (
-    // Slider
-    <div className="w-full h-[350px] flex sm:flex-col gap-[20px] justify-between items-center">
+    <div className="w-full h-[350px] flex gap-5 sm:h-[280px] sm:flex-col">
       {imageIndex !== null && (
-        <div className="flex absolute w-screen h-screen top-0 left-0 bg-black z-[1000] sm:items-center sm:justify-center">
-          {/* Arrow */}
+        <div className="absolute top-0 left-0 w-screen h-screen bg-black z-[2000] flex gap-[50px] justify-between items-center">
           <div
-            className="flex-1 cursor-pointer flex items-center justify-center"
+            className="flex-1 flex items-center justify-center cursor-pointer"
             onClick={() => changeSlide("left")}
           >
             <img
-              className="w-[50px] object-cover sm:w-[15px]"
               src={arrow}
-              alt=""
+              alt="left arrow"
+              className="w-[50px] object-cover sm:w-[15px]"
             />
           </div>
-
-          {/* Image Container */}
           <div className="flex-[10_10_0%] py-9">
-            <img
-              className="w-full h-full object-cover rounded-md sm:h-[50%] sm:object-contain"
-              src={images[imageIndex]}
-              alt=""
-            />
+            <img src={images[imageIndex]} alt="" />
           </div>
-
-          {/* Arrow */}
           <div
-            className="flex-1 cursor-pointer flex items-center justify-center"
+            className="flex-1 flex items-center justify-center cursor-pointer"
             onClick={() => changeSlide("right")}
           >
             <img
-              className="w-[50px] object-cover transform rotate-180 sm:w-[15px]"
               src={arrow}
-              alt=""
+              className="rotate-180 w-[50px] object-cover sm:w-[15px]"
+              alt="I am not available"
             />
           </div>
-
-          {/* Close */}
           <div
-            className="absolute top-0 cursor-pointer text-white right-0 font-extrabold text-4xl p-[20px]"
+            className="absolute top-0 right-0 text-white text-3xl font-bold p-12 cursor-pointer"
             onClick={() => setImageIndex(null)}
           >
             X
           </div>
         </div>
       )}
-
-      {/* //Big Image */}
-      <div className="flex-[3_3_0%]">
+      <div className="flex-grow sm:flex-2/3 rounded-xl overflow-hidden cursor-pointer">
         <img
-          className="w-full h-full object-cover rounded-xl cursor-pointer"
           src={images[0]}
           alt=""
           onClick={() => setImageIndex(0)}
+          className="w-full h-full object-cover rounded-xl"
         />
       </div>
-      {/* //Small Images */}
-      <div className="flex-1 flex flex-col justify-between gap-[20px] sm:flex-row">
-        {images.slice(1).map((image, index) => {
-          return (
-            <img
-              className="w-full h-[100px] object-cover rounded-xl cursor-pointer sm:w-24"
-              src={image}
-              alt=""
-              key={index}
-              onClick={() => setImageIndex(index + 1)}
-            />
-          );
-        })}
+      <div className="flex-1 flex flex-col justify-between gap-5 sm:flex-row sm:overflow-y-hidden sm:overflow-x-scroll sm:min-h-fit">
+        {images.slice(1).map((image, index) => (
+          <img
+            src={image}
+            alt=""
+            key={index}
+            onClick={() => setImageIndex(index + 1)}
+            className="w-full h-[100px] sm:h-[80px] sm:w-24 sm:gap-3 object-cover rounded-xl cursor-pointer"
+          />
+        ))}
       </div>
     </div>
   );
-};
+}
 
 export default Slider;

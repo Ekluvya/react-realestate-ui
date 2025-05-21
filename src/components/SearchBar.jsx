@@ -1,5 +1,6 @@
 import { useState } from "react";
 import search from "../../public/search.png";
+import { Link } from "react-router-dom";
 
 const SearchBar = () => {
   const types = ["Buy", "Rent"];
@@ -12,6 +13,10 @@ const SearchBar = () => {
 
   const switchType = (val) => {
     setQuery((prev) => ({ ...prev, type: val }));
+  };
+
+  const handleChange = (e) => {
+    setQuery((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
   return (
     <div>
@@ -36,6 +41,7 @@ const SearchBar = () => {
           type="text"
           name="location"
           placeholder="City Location"
+          onChange={handleChange}
         ></input>
         <input
           className="sm:border sm:border-solid sm:border-spanish-gray border-none focus:outline-none lg:w-36 md:w-44 sm:w-auto sm:p-5 lg:px-1 py-0 px-2.5 w-48"
@@ -44,6 +50,7 @@ const SearchBar = () => {
           min={0}
           max={10000000}
           placeholder="Min Price"
+          onChange={handleChange}
         ></input>
         <input
           className="sm:border sm:border-solid sm:border-spanish-gray border-none focus:outline-none lg:w-36 md:w-44 sm:w-auto sm:p-5 lg:px-1 py-0 px-2.5 w-48"
@@ -52,13 +59,16 @@ const SearchBar = () => {
           min={0}
           max={10000000}
           placeholder="Max Price"
+          onChange={handleChange}
         ></input>
-        <button
+        <Link
+          to={`/list?type=${query.type}&city=${query.location}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}`}
           className="sm:p-4 border-none cursor-pointer bg-mustard flex-1 flex justify-center items-center"
-          type="submit"
         >
-          <img src={search} alt="search" />
-        </button>
+          <button type="submit">
+            <img src={search} alt="search" />
+          </button>
+        </Link>
       </form>
     </div>
   );

@@ -1,11 +1,10 @@
 import { useEffect, useRef } from "react";
 
-const UploadWidget = ({ uwConfig, setAvatar }) => {
+const UploadWidget = ({ uwConfig, setAvatar, setStatus }) => {
   const uploadWidgetRef = useRef(null);
   const uploadButtonRef = useRef(null);
 
   useEffect(() => {
-    const images = [];
     const initializeUploadWidget = () => {
       if (window.cloudinary && uploadButtonRef.current) {
         // Create upload widget
@@ -14,8 +13,12 @@ const UploadWidget = ({ uwConfig, setAvatar }) => {
           (error, result) => {
             if (!error && result && result.event === "success") {
               console.log("Upload successful:", result.info);
-              images.push(result.info.secure_url);
-              setAvatar(images);
+              if (typeof setAvatar === "function") {
+                setAvatar(result.info.secure_url);
+              }
+              if (typeof setStatus === "function") {
+                setStatus((prev) => [...prev, result.info.secure_url]);
+              }
             }
           }
         );

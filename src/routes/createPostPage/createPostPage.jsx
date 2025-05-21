@@ -103,8 +103,8 @@ function NewPostPage() {
         },
       });
 
-      console.log(res.data);
-      navigate("/profile");
+      console.log(res.data.post_id);
+      navigate("/post/" + res.data.post_id);
     } catch (err) {
       console.log(err);
       setError(error);
@@ -142,7 +142,7 @@ function NewPostPage() {
               </p>
             )}
           </div>
-          <UploadWidget uwConfig={uwConfig} setAvatar={setImages} />
+          <UploadWidget uwConfig={uwConfig} setStatus={setImages} />
         </div>
 
         <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">

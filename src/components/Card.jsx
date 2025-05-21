@@ -3,11 +3,28 @@ import bed from "../../public/bed.png";
 import bath from "../../public/bath.png";
 import save from "../../public/save.png";
 import chat from "../../public/chat.png";
-
+import saved from "../../public/saveddone.png";
 import { Link } from "react-router-dom";
+import apiRequest from "../lib/apiRequest";
+import { useState } from "react";
 
-const Card = ({ item }) => {
+const Card = ({ item, isInitiallySaved }) => {
   console.log(item);
+  const [isSaved, setIsSaved] = useState(isInitiallySaved);
+  const handleSaveClick = async () => {
+    try {
+      if (isSaved) {
+        await apiRequest.post(`/post/unsave/${item._id}`);
+      } else {
+        await apiRequest.post(`/post/save/${item._id}`);
+      }
+      setIsSaved((prev) => !prev);
+    } catch (error) {
+      console.error("Save/Unsave failed", error);
+    }
+  };
+
+  console.log("isSaved is:", isSaved);
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow duration-300 sm:max-w-full md:max-w-md lg:max-w-lg xl:max-w-xl">
       {/* Image Section */}
@@ -27,7 +44,7 @@ const Card = ({ item }) => {
         {/* Title & Address */}
         <div className="mb-3">
           <Link
-            to={`/${item.id}`}
+            to={`/post/${item._id}`}
             className="text-xl font-semibold text-gray-900 hover:text-rebecca-purple transition-colors duration-200 md:text-2xl lg:text-3xl"
           >
             {item.title}
@@ -55,13 +72,30 @@ const Card = ({ item }) => {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-x-3">
-            <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition duration-200 md:p-3">
-              <img
-                className="w-5 h-5 md:w-6 md:h-6"
-                src={save}
-                alt="Save icon"
-              />
-            </button>
+            {isSaved ? (
+              <button
+                className="p-2 rounded-full bg-mustard hover:bg-gray-200 transition duration-200 md:p-3"
+                onClick={handleSaveClick}
+              >
+                <img
+                  className="w-5 h-5 md:w-6 md:h-6"
+                  src={saved}
+                  alt="Save icon"
+                />
+              </button>
+            ) : (
+              <button
+                className="p-2 rounded-full bg-gray-300 hover:bg-gray-200 transition duration-200 md:p-3"
+                onClick={handleSaveClick}
+              >
+                <img
+                  className="w-5 h-5 md:w-6 md:h-6"
+                  src={save}
+                  alt="Save icon"
+                />
+              </button>
+            )}
+
             <button className="p-2 rounded-full bg-blue-100 hover:bg-blue-200 transition duration-200 md:p-3">
               <img
                 className="w-5 h-5 md:w-6 md:h-6"

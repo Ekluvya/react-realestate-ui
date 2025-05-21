@@ -10,13 +10,44 @@ import fee from "../../../public/fee.png";
 import size from "../../../public/size.png";
 import bedroom from "../../../public/bed.png";
 import bathroom from "../../../public/bath.png";
+import { useLoaderData } from "react-router-dom";
+import apiRequest from "../../lib/apiRequest";
+import { useEffect, useCallback, useState } from "react";
 
 const SinglePage = () => {
+  const post = useLoaderData();
+  const [user, setUser] = useState({
+    username: "Not Available",
+    avatar: null,
+    email: "Not Available",
+  });
+  console.log(post);
+
+  function removeTags(str) {
+    if (str === null || str === "") return false;
+    else str = str.toString();
+
+    // Regular expression to identify HTML tags in
+    // the input string. Replacing the identified
+    // HTML tag with a null string.
+    return str.replace(/(<([^>]+)>)/gi, "");
+  }
+
+  const getUser = useCallback(async () => {
+    await apiRequest.get("/user/get_user/" + post.user_id).then((response) => {
+      console.log(response.data);
+      setUser(response.data);
+    });
+  }, [post]);
+
+  useEffect(() => {
+    getUser();
+  }, [getUser]);
   return (
     <div className="flex sm:flex-col md:flex-col xl:h-screen">
-      <div className="flex-[3_3_0%] h-full">
+      <div className="flex-[3_3_0%] h-full w-">
         <div className="pr-12 sm:pr-0 md:pr-0">
-          <Slider images={singlePostData.images} />
+          <Slider images={post.postDetail.images} />
           {/* Info */}
           <div className="mt-8">
             {/* Top */}
@@ -24,17 +55,17 @@ const SinglePage = () => {
               {/* Post */}
               <div className="flex flex-col gap-[20px]">
                 <h1 className="text-2xl font-semibold text-gray-800 sm:text-xl">
-                  {singlePostData.title}
+                  {post.title}
                 </h1>
                 {/* Address */}
                 <div className="flex items-center mt-2 text-gray-600 sm:text-sm">
                   <img className="w-4 h-4 mr-2" src={pin} alt="" />
-                  <span>{singlePostData.address}</span>
+                  <span>{post.address}</span>
                 </div>
 
                 {/* Price */}
                 <div className="mt-4 text-xl font-light p-[10px] text-black bg-mustard w-[150px] text-center sm:text-base sm:w-[100px]">
-                  ₹ {singlePostData.price}
+                  ₹ {post.price}
                 </div>
               </div>
 
@@ -45,24 +76,27 @@ const SinglePage = () => {
                     height={50}
                     width={50}
                     className=" h-full w-full object-cover"
-                    src={singleUserData.image}
+                    src={user.avatar ? user.avatar : "/noavatar.jpg"}
                     alt=""
                   />
                 </div>
                 <span className="font-medium text-black sm:text-sm">
-                  {singleUserData.name}
+                  {user.username}
                 </span>
               </div>
             </div>
 
             {/* Bottom */}
-            <div className="mt-8 pb-6 border-t border-gray-100 pt-6">
+            {/* Bottom */}
+            <div className="mt-8 pb-6 border-t border-gray-100 pt-6 max-w-full break-words">
               <h2 className="text-lg font-medium text-gray-800 mb-3">
                 Description
               </h2>
-              <p className="text-gray-600 leading-relaxed">
-                {singlePostData.description}
-              </p>
+              <div className="break-words">
+                <p className="text-gray-600 leading-relaxed">
+                  {removeTags(post.postDetail.desc)}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -80,7 +114,14 @@ const SinglePage = () => {
                 <span className="font-medium text-gray-800 block">
                   Utilities
                 </span>
-                <p className="text-gray-500 text-sm">Renter is responsible</p>
+                <p
+                  className="text-gray-500 text-sm"
+                  title={post.postDetail.utilities}
+                >
+                  {post.postDetail.utilities.length > 50
+                    ? post.postDetail.utilities.slice(0, 48) + " ...."
+                    : post.postDetail.utilities}
+                </p>
               </div>
             </div>
 
@@ -93,7 +134,7 @@ const SinglePage = () => {
                 <span className="font-medium text-gray-800 block">
                   Pet Policy
                 </span>
-                <p className="text-gray-500 text-sm">Pets allowed</p>
+                <p className="text-gray-500 text-sm">{post.postDetail.pet}</p>
               </div>
             </div>
 
@@ -107,7 +148,7 @@ const SinglePage = () => {
                   Property Fees
                 </span>
                 <p className="text-gray-500 text-sm">
-                  Must have 3x the rent in household income
+                  {post.postDetail.income}
                 </p>
               </div>
             </div>
@@ -143,7 +184,7 @@ const SinglePage = () => {
                   <p className="text-gray-500 text-xs">
                     {" "}
                     {/* Value */}
-                    80 sqft {/* Extracted value */}
+                    {post.postDetail.size} sqft {/* Extracted value */}
                   </p>
                 </div>
               </div>
@@ -166,7 +207,8 @@ const SinglePage = () => {
                   </span>
                   <p className="text-gray-500 text-xs">
                     {" "}
-                    {/* Value */}1 bed {/* Extracted value */}
+                    {/* Value */}
+                    {post.bedroom} bed {/* Extracted value */}
                   </p>
                 </div>
               </div>
@@ -189,7 +231,8 @@ const SinglePage = () => {
                   </span>
                   <p className="text-gray-500 text-xs">
                     {" "}
-                    {/* Value */}1 bathroom {/* Extracted value */}
+                    {/* Value */}
+                    {post.bathroom} bathroom {/* Extracted value */}
                   </p>
                 </div>
               </div>
@@ -222,7 +265,10 @@ const SinglePage = () => {
                   <p className="text-gray-500 text-xs">
                     {" "}
                     {/* Adjusted text size slightly */}
-                    250m Away
+                    {post.postDetail.school > 1000
+                      ? `${post.postDetail.school / 1000} km`
+                      : `${post.postDetail.school} m`}{" "}
+                    Away
                   </p>
                 </div>
               </div>
@@ -244,7 +290,12 @@ const SinglePage = () => {
                   <span className="font-medium text-gray-800 block text-sm">
                     Bus Stop
                   </span>
-                  <p className="text-gray-500 text-xs">100m Away</p>
+                  <p className="text-gray-500 text-xs">
+                    {post.postDetail.bus > 1000
+                      ? `${post.postDetail.bus / 1000} km`
+                      : `${post.postDetail.bus} m`}{" "}
+                    Away
+                  </p>
                 </div>
               </div>
 
@@ -265,7 +316,12 @@ const SinglePage = () => {
                   <span className="font-medium text-gray-800 block text-sm">
                     Restaurant
                   </span>
-                  <p className="text-gray-500 text-xs">200m Away</p>
+                  <p className="text-gray-500 text-xs">
+                    {post.postDetail.restaurant > 1000
+                      ? `${post.postDetail.restaurant / 1000} km`
+                      : `${post.postDetail.restaurant} m`}{" "}
+                    Away
+                  </p>
                 </div>
               </div>
 
@@ -274,7 +330,7 @@ const SinglePage = () => {
           </div>
           <p className="font-bold text-gray-700 mb-2">Location</p>
           <div className="rounded-lg overflow-hidden shadow-md h-[170px]">
-            <Map items={[singlePostData]} />
+            <Map items={[post]} />
           </div>
 
           <div className="mt-6 flex gap-4 sm:text-xs">

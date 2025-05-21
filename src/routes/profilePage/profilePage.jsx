@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Card from "../../components/Card";
 import Message from "../../components/Message";
 import List from "../../components/List";
@@ -12,6 +12,34 @@ import noAvatar from "../../../public/noavatar.jpg";
 const ProfilePage = () => {
   const navigate = useNavigate();
   const { currentUser, updateUser } = useContext(AuthContext);
+  const [savedPosts, setSavedPosts] = useState([]);
+  const [createdPosts, setCreatedPosts] = useState([]);
+
+  useEffect(() => {
+    async function getSaved() {
+      await apiRequest
+        .get("/user/get-saved-items")
+        .then((response) => {
+          setSavedPosts(response.data);
+
+          console.log("Saved Posts are: ", response.data);
+        })
+        .catch((Error) => console.log(Error));
+    }
+
+    async function getCreated() {
+      await apiRequest
+        .get("/user/get-created-items")
+        .then((response) => {
+          setCreatedPosts(response.data);
+          console.log("Created Posts are", response.data);
+        })
+        .catch((Error) => console.log(Error));
+    }
+
+    getSaved();
+    getCreated();
+  }, []);
 
   const handleLogout = () => {
     apiRequest.post("/auth/logout").then(function (response) {
@@ -74,8 +102,8 @@ const ProfilePage = () => {
               <Link to={"/createPost"}>Create New Post</Link>
             </button>
           </div>
-
-          <List />
+          {console.log("Craeted Posts are after loading:", createdPosts)}
+          <List data={createdPosts} />
 
           {/* Saved List Header */}
           <div className="flex items-center justify-between mb-6 mt-8">
@@ -84,7 +112,7 @@ const ProfilePage = () => {
             </h1>
           </div>
 
-          <List />
+          <List data={savedPosts} />
         </div>
       </div>
 

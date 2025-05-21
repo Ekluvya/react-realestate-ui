@@ -9,6 +9,7 @@ import Login from "./routes/login/login";
 import Register from "./routes/register/register";
 import UpdateUser from "./routes/updateUser/updateUser";
 import NewPostPage from "./routes/createPostPage/createPostPage";
+import { listPageLoader, singlePageLoader } from "./loaders/loaders";
 
 function App() {
   const router = createHashRouter([
@@ -17,9 +18,10 @@ function App() {
       element: <Layout />,
       children: [
         { path: "", element: <HomePage /> },
-        { path: "list", element: <ListPage /> },
+
         {
-          path: ":id",
+          path: "post/:id",
+          loader: singlePageLoader,
           element: <SinglePage />,
         },
       ],
@@ -48,6 +50,7 @@ function App() {
           path: "createPost",
           element: <NewPostPage />,
         },
+        { path: "list", loader: listPageLoader, element: <ListPage /> },
       ],
     },
   ]);
